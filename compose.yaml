@@ -1,0 +1,23 @@
+services:
+  site:
+    build:
+      context: .
+      target: runtime
+    image: fabriceboyer-github-io:latest
+    container_name: fabriceboyer-site
+    ports:
+      - "${PORT:-8080}:80"
+    restart: unless-stopped
+
+  # Serveur de développement Vite avec rechargement à chaud :
+  #   docker compose --profile dev up dev
+  dev:
+    profiles: ["dev"]
+    image: node:22-alpine
+    working_dir: /app
+    command: sh -c "npm ci && npm run dev -- --host 0.0.0.0"
+    ports:
+      - "${DEV_PORT:-5173}:5173"
+    volumes:
+      - .:/app
+      - /app/node_modules

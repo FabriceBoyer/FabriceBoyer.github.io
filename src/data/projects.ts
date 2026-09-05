@@ -1,6 +1,6 @@
 export type Category = 'apps' | 'libs'
 
-export type Kind = 'webapp' | 'game' | 'explorer' | 'server' | 'library' | 'dataset' | 'tool' | 'lab'
+export type Kind = 'webapp' | 'game' | 'explorer' | 'server' | 'library' | 'dataset' | 'tool'
 
 export interface Project {
   /** Nom du dépôt GitHub. Sert aussi de clé de vignette animée. */
@@ -232,34 +232,6 @@ export const projects: Project[] = [
     desc: {
       fr: "Listes de mots exploitables par une machine, reformatées en JSON — à commencer par la New General Service List 1.2. Chaîne reproductible src → csv → json, versionnée avec la date de capture des données.",
       en: 'Machine-readable word lists reformatted as JSON, starting with the New General Service List 1.2. A reproducible src → csv → json pipeline, versioned with the date the data was captured.',
-    },
-  },
-  {
-    slug: 'AOC',
-    title: 'Advent of Code',
-    category: 'libs',
-    kind: 'lab',
-    lang: 'Python',
-    stars: 0,
-    updated: '2025-12-25',
-    topics: ['algorithms', 'puzzles', 'parsing'],
-    desc: {
-      fr: "Mes solutions à l'Advent of Code, un puzzle algorithmique par jour de décembre. Un terrain d'entraînement annuel pour l'analyse d'entrées biscornues et les structures de données bien choisies.",
-      en: 'My Advent of Code solutions — one algorithmic puzzle per day through December. A yearly training ground for parsing awkward inputs and picking the right data structure.',
-    },
-  },
-  {
-    slug: 'docker_test',
-    title: 'Docker Test',
-    category: 'libs',
-    kind: 'lab',
-    lang: 'Dockerfile',
-    stars: 0,
-    updated: '2024-02-06',
-    topics: ['docker', 'multi-stage'],
-    desc: {
-      fr: "Bac à sable pour éprouver les sujets Docker avant de les emmener en production : docker init, images multi-étapes, arborescences de build et conventions de conteneurisation.",
-      en: 'A sandbox for trying out Docker topics before taking them to production: docker init, multi-stage images, build layouts and containerisation conventions.',
     },
   },
 ]

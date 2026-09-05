@@ -5,38 +5,42 @@ export type Theme = 'light' | 'dark' | 'system'
 export type Lang = 'fr' | 'en'
 
 export const ACCENTS = [
-  { name: 'violet', value: '#7c5cff' },
-  { name: 'indigo', value: '#4f6bff' },
-  { name: 'cyan', value: '#06b6d4' },
-  { name: 'emerald', value: '#10b981' },
-  { name: 'lime', value: '#84cc16' },
-  { name: 'amber', value: '#f59e0b' },
-  { name: 'orange', value: '#f97316' },
-  { name: 'rose', value: '#f43f5e' },
-  { name: 'pink', value: '#ec4899' },
-  { name: 'slate', value: '#64748b' },
+  { name: 'blue', value: '#2f6feb' },
+  { name: 'indigo', value: '#4f5bd5' },
+  { name: 'violet', value: '#7856d6' },
+  { name: 'teal', value: '#0d8a8a' },
+  { name: 'green', value: '#1a7f45' },
+  { name: 'olive', value: '#5f7a1f' },
+  { name: 'amber', value: '#a86a12' },
+  { name: 'red', value: '#c0392b' },
+  { name: 'rose', value: '#b03060' },
+  { name: 'slate', value: '#5a6675' },
 ] as const
 
-
-/** Langue déduite du navigateur, repli sur le français. */
+/** Langue du navigateur, repli sur le français. */
 export function detectLang(): Lang {
   if (typeof navigator === 'undefined') return 'fr'
-  return navigator.languages?.some((l) => l.toLowerCase().startsWith('en')) ? 'en' : 'fr'
+  const tags = navigator.languages?.length ? navigator.languages : [navigator.language]
+  for (const tag of tags) {
+    const base = tag?.toLowerCase().split('-')[0]
+    if (base === 'fr') return 'fr'
+    if (base === 'en') return 'en'
+  }
+  return 'fr'
 }
 
-/** Langue déjà persistée, si l'utilisateur en a choisi une. */
-export function readStoredLang(): Lang | null {
-  try {
-    const s = JSON.parse(localStorage.getItem('fb-settings') || '{}').state
-    return s?.lang === 'en' || s?.lang === 'fr' ? s.lang : null
-  } catch {
-    return null
-  }
+/** Le thème effectif, en tenant compte de la préférence système. */
+export function resolveTheme(theme: Theme): 'light' | 'dark' {
+  if (theme !== 'system') return theme
+  if (typeof window === 'undefined') return 'light'
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
 interface SettingsState {
+  /** `'system'` tant que l'utilisateur n'a rien choisi. */
   theme: Theme
-  lang: Lang
+  /** `null` tant que l'utilisateur n'a rien choisi : la langue suit le navigateur. */
+  lang: Lang | null
   accent: string
   setTheme: (t: Theme) => void
   setLang: (l: Lang) => void
@@ -47,7 +51,7 @@ export const useSettings = create<SettingsState>()(
   persist(
     (set) => ({
       theme: 'system',
-      lang: detectLang(),
+      lang: null,
       accent: ACCENTS[0].value,
       setTheme: (theme) => set({ theme }),
       setLang: (lang) => set({ lang }),
@@ -57,8 +61,15 @@ export const useSettings = create<SettingsState>()(
   ),
 )
 
-/** Le thème effectif, en tenant compte de la préférence système. */
-export function resolveTheme(theme: Theme): 'light' | 'dark' {
-  if (theme !== 'system') return theme
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+/** La langue à afficher : le choix de l'utilisateur, sinon celle du navigateur. */
+export const useLang = (): Lang => useSettings((s) => s.lang) ?? detectLang()
+
+/** Langue déjà choisie et persistée, s'il y en a une (lecture hors React). */
+export function readStoredLang(): Lang | null {
+  try {
+    const s = JSON.parse(localStorage.getItem('fb-settings') || '{}').state
+    return s?.lang === 'en' || s?.lang === 'fr' ? s.lang : null
+  } catch {
+    return null
+  }
 }

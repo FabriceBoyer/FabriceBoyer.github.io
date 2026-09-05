@@ -1,5 +1,6 @@
 /* Vignettes animées : uniquement des animations CSS, pour que la règle globale
-   prefers-reduced-motion les neutralise toutes d'un coup. */
+   prefers-reduced-motion les neutralise toutes d'un coup. Les mouvements sont
+   volontairement lents et de faible amplitude. */
 .th { --ink: var(--fg); --dim: var(--fg-faint); }
 .th * { transform-box: fill-box; transform-origin: center; }
 
@@ -10,40 +11,36 @@
 .th-s-dim { fill: none; stroke: var(--dim); stroke-linecap: round; stroke-linejoin: round; }
 .th-s-acc { fill: none; stroke: var(--accent); stroke-linecap: round; stroke-linejoin: round; }
 
-@keyframes fbFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
-@keyframes fbFloatSm { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-2.5px); } }
-@keyframes fbPulse { 0%, 100% { opacity: 0.22; } 50% { opacity: 1; } }
-@keyframes fbBlink { 0%, 45% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes fbFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+@keyframes fbFloatSm { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.5px); } }
+@keyframes fbPulse { 0%, 100% { opacity: 0.38; } 50% { opacity: 0.9; } }
+@keyframes fbBlink { 0%, 45% { opacity: 0.8; } 50%, 100% { opacity: 0; } }
 @keyframes fbDraw { 0% { stroke-dashoffset: var(--len); } 55%, 100% { stroke-dashoffset: 0; } }
-@keyframes fbScan { 0% { transform: translateX(-30px); opacity: 0; } 12%, 88% { opacity: 1; } 100% { transform: translateX(330px); opacity: 0; } }
-@keyframes fbBars { 0%, 100% { transform: scaleY(0.28); } 50% { transform: scaleY(1); } }
+@keyframes fbScan { 0% { transform: translateX(-40px); opacity: 0; } 15%, 85% { opacity: 1; } 100% { transform: translateX(330px); opacity: 0; } }
+@keyframes fbBars { 0%, 100% { transform: scaleY(0.35); } 50% { transform: scaleY(1); } }
 @keyframes fbSpin { to { transform: rotate(360deg); } }
 @keyframes fbSpinBack { to { transform: rotate(-360deg); } }
-@keyframes fbPop { 0%, 8% { transform: scale(0); opacity: 0; } 22%, 92% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
-@keyframes fbRise { 0% { transform: translateY(14px); opacity: 0; } 25%, 80% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-10px); opacity: 0; } }
-@keyframes fbFlicker { 0%, 100% { transform: scale(1) translateY(0); opacity: 0.95; } 30% { transform: scale(0.86, 1.12) translateY(-1px); opacity: 1; } 65% { transform: scale(1.08, 0.92); opacity: 0.8; } }
-@keyframes fbTravel { 0% { offset-distance: 0%; opacity: 0; } 10%, 90% { opacity: 1; } 100% { offset-distance: 100%; opacity: 0; } }
-@keyframes fbSweep { 0% { transform: rotate(-32deg); } 50% { transform: rotate(32deg); } 100% { transform: rotate(-32deg); } }
-@keyframes fbWidth { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.22); } }
-@keyframes fbSnow { 0% { transform: translateY(-12px); opacity: 0; } 15% { opacity: 0.9; } 100% { transform: translateY(150px); opacity: 0; } }
-@keyframes fbSlide { 0% { transform: translateX(0); } 100% { transform: translateX(-64px); } }
-@keyframes fbTick { 0%, 100% { transform: translateY(0); } 10%, 90% { transform: translateY(-96px); } }
+@keyframes fbPop { 0%, 8% { transform: scale(0.6); opacity: 0; } 24%, 100% { transform: scale(1); opacity: 1; } }
+@keyframes fbRise { 0% { transform: translateY(12px); opacity: 0; } 28%, 78% { transform: translateY(0); opacity: 0.9; } 100% { transform: translateY(-8px); opacity: 0; } }
+@keyframes fbFlicker { 0%, 100% { transform: scale(1) translateY(0); opacity: 0.85; } 35% { transform: scale(0.92, 1.06); opacity: 1; } 70% { transform: scale(1.04, 0.96); opacity: 0.75; } }
+@keyframes fbTravel { 0% { offset-distance: 0%; opacity: 0; } 12%, 88% { opacity: 0.9; } 100% { offset-distance: 100%; opacity: 0; } }
+@keyframes fbSweep { 0% { transform: rotate(-26deg); } 50% { transform: rotate(26deg); } 100% { transform: rotate(-26deg); } }
+@keyframes fbWidth { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(0.25); } }
+@keyframes fbTick { 0%, 100% { transform: translateY(0); } 12%, 88% { transform: translateY(-96px); } }
 
-.a-float { animation: fbFloat 4s ease-in-out infinite; }
-.a-floatsm { animation: fbFloatSm 3.2s ease-in-out infinite; }
-.a-pulse { animation: fbPulse 2.6s ease-in-out infinite; }
-.a-blink { animation: fbBlink 1.1s steps(1) infinite; }
-.a-draw { stroke-dasharray: var(--len); animation: fbDraw 4.5s ease-in-out infinite; }
-.a-scan { animation: fbScan 3.6s linear infinite; }
-.a-bars { animation: fbBars 1.4s ease-in-out infinite; }
-.a-spin { animation: fbSpin 9s linear infinite; }
-.a-spinb { animation: fbSpinBack 7s linear infinite; }
-.a-pop { animation: fbPop 5s ease-in-out infinite; }
-.a-rise { animation: fbRise 3.4s ease-in-out infinite; }
-.a-flicker { animation: fbFlicker 0.9s ease-in-out infinite; }
-.a-travel { animation: fbTravel 3s linear infinite; }
-.a-sweep { animation: fbSweep 3.4s ease-in-out infinite; }
-.a-width { animation: fbWidth 3s ease-in-out infinite; }
-.a-snow { animation: fbSnow 6s linear infinite; }
-.a-slide { animation: fbSlide 5s linear infinite; }
-.a-tick { animation: fbTick 4s cubic-bezier(0.7, 0, 0.3, 1) infinite; }
+.a-float { animation: fbFloat 7s ease-in-out infinite; }
+.a-floatsm { animation: fbFloatSm 6s ease-in-out infinite; }
+.a-pulse { animation: fbPulse 4.4s ease-in-out infinite; }
+.a-blink { animation: fbBlink 1.4s steps(1) infinite; }
+.a-draw { stroke-dasharray: var(--len); animation: fbDraw 7s ease-in-out infinite; }
+.a-scan { animation: fbScan 7s linear infinite; }
+.a-bars { animation: fbBars 2.4s ease-in-out infinite; }
+.a-spin { animation: fbSpin 18s linear infinite; }
+.a-spinb { animation: fbSpinBack 14s linear infinite; }
+.a-pop { animation: fbPop 7s ease-in-out infinite; }
+.a-rise { animation: fbRise 5.5s ease-in-out infinite; }
+.a-flicker { animation: fbFlicker 1.6s ease-in-out infinite; }
+.a-travel { animation: fbTravel 5s linear infinite; }
+.a-sweep { animation: fbSweep 6s ease-in-out infinite; }
+.a-width { animation: fbWidth 5s ease-in-out infinite; }
+.a-tick { animation: fbTick 5.5s cubic-bezier(0.7, 0, 0.3, 1) infinite; }

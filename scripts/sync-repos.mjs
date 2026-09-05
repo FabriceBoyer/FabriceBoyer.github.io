@@ -17,6 +17,8 @@ import { readFileSync, writeFileSync } from 'node:fs'
 
 const USER = 'FabriceBoyer'
 const SELF = `${USER}.github.io`
+/** Dépôts publics volontairement absents de la page. */
+const IGNORED = new Set([SELF, 'AOC', 'docker_test'])
 const FILE = new URL('../src/data/projects.ts', import.meta.url)
 
 const fields = 'name,description,primaryLanguage,stargazerCount,updatedAt,homepageUrl'
@@ -25,7 +27,7 @@ const raw = execFileSync(
   ['repo', 'list', USER, '--limit', '200', '--no-archived', '--source', '--visibility', 'public', '--json', fields],
   { encoding: 'utf8' },
 )
-const remote = JSON.parse(raw).filter((r) => r.name !== SELF)
+const remote = JSON.parse(raw).filter((r) => !IGNORED.has(r.name))
 
 let source = readFileSync(FILE, 'utf8')
 const listed = [...source.matchAll(/slug: '([^']+)'/g)].map((m) => m[1])

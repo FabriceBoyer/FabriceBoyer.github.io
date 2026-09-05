@@ -12,33 +12,26 @@ export function Section({ category, id }: { category: Category; id: string }) {
   const langs = useMemo(() => {
     const counts = new Map<string, number>()
     all.forEach((p) => counts.set(p.lang, (counts.get(p.lang) ?? 0) + 1))
-    return [...counts.entries()].sort((a, b) => b[1] - a[1])
+    return [...counts.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
   }, [all])
 
   const shown = filter ? all.filter((p) => p.lang === filter) : all
 
   return (
     <section className="section shell" id={id}>
-      <motion.div
-        className="section-head"
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      >
-        <div className="section-kicker">{t(`${category}.kicker`)}</div>
-        <h2>{t(`${category}.title`)}</h2>
+      <div className="section-head">
+        <h2>
+          {t(`${category}.title`)}
+          <span className="section-count">{all.length}</span>
+        </h2>
         <p>{t(`${category}.sub`)}</p>
-      </motion.div>
+      </div>
 
       {langs.length > 1 && (
         <div className="filters" role="group" aria-label={t('filters.lang')}>
           <button type="button" className="chip" aria-pressed={filter === null} onClick={() => setFilter(null)}>
-            {filter === null && <motion.span layoutId={`${id}-chip`} className="chip-bg" />}
-            <span>
-              {t('filters.all')}
-              <em className="chip-count">{all.length}</em>
-            </span>
+            {t('filters.all')}
+            <em className="chip-count">{all.length}</em>
           </button>
           {langs.map(([l, n]) => (
             <button
@@ -48,11 +41,8 @@ export function Section({ category, id }: { category: Category; id: string }) {
               aria-pressed={filter === l}
               onClick={() => setFilter(filter === l ? null : l)}
             >
-              {filter === l && <motion.span layoutId={`${id}-chip`} className="chip-bg" />}
-              <span>
-                {l}
-                <em className="chip-count">{n}</em>
-              </span>
+              {l}
+              <em className="chip-count">{n}</em>
             </button>
           ))}
         </div>
@@ -61,7 +51,7 @@ export function Section({ category, id }: { category: Category; id: string }) {
       <motion.div className="grid" layout>
         <AnimatePresence mode="popLayout">
           {shown.map((p, i) => (
-            <motion.div key={p.slug} layout exit={{ opacity: 0, scale: 0.94 }} transition={{ duration: 0.25 }}>
+            <motion.div key={p.slug} layout exit={{ opacity: 0, scale: 0.97 }} transition={{ duration: 0.18 }}>
               <ProjectCard project={p} index={i} />
             </motion.div>
           ))}

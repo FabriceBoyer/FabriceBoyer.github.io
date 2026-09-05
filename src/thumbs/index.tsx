@@ -566,104 +566,7 @@ const WordLists = () => (
   </Frame>
 )
 
-const Aoc = () => (
-  <Frame>
-    {Array.from({ length: 14 }, (_, i) => (
-      <circle
-        key={i}
-        cx={20 + i * 21}
-        cy="0"
-        r={1.4 + (i % 3) * 0.7}
-        className="th-dim a-snow"
-        opacity="0.6"
-        style={d((i % 7) * 0.85)}
-      />
-    ))}
-    {Array.from({ length: 12 }, (_, i) => {
-      const col = i % 4
-      const row = Math.floor(i / 4)
-      const on = [0, 3, 5, 8, 10].includes(i)
-      return (
-        <g key={`d${i}`} className={on ? 'a-pulse' : ''} style={d(i * 0.22)}>
-          <rect
-            x={96 + col * 34}
-            y={48 + row * 32}
-            width="28"
-            height="26"
-            rx="5"
-            className={on ? 'th-acc' : 'th-dim'}
-            opacity={on ? 0.28 : 0.12}
-          />
-          <text
-            x={110 + col * 34}
-            y={66 + row * 32}
-            textAnchor="middle"
-            fontSize="10"
-            className={on ? 'th-acc' : 'th-dim'}
-            style={mono}
-            fill="currentColor"
-            opacity="0.9"
-          >
-            {i + 1}
-          </text>
-        </g>
-      )
-    })}
-    <path
-      d="M42 128 l3.6 7.6 8.4 1.2 -6 5.9 1.4 8.3 -7.4 -3.9 -7.4 3.9 1.4 -8.3 -6 -5.9 8.4 -1.2 z"
-      className="th-acc a-pulse"
-      opacity="0.9"
-    />
-    <path
-      d="M272 36 l3 6.4 7 1 -5 4.9 1.2 7 -6.2 -3.3 -6.2 3.3 1.2 -7 -5 -4.9 7 -1 z"
-      className="th-acc a-pulse"
-      style={d(1.1)}
-      opacity="0.6"
-    />
-  </Frame>
-)
 
-const DockerTest = () => (
-  <Frame>
-    {[
-      [104, 96],
-      [140, 96],
-      [176, 96],
-      [122, 66],
-      [158, 66],
-      [140, 36],
-    ].map(([x, y], i) => (
-      <g key={i} className="a-float" style={d(i * 0.35)}>
-        <rect x={x} y={y} width="32" height="24" rx="4" className="th-acc" opacity={0.16 + i * 0.05} />
-        <rect x={x} y={y} width="32" height="24" rx="4" className="th-s-acc" strokeWidth="1.4" opacity="0.75" />
-        <line x1={x + 11} y1={y + 6} x2={x + 11} y2={y + 18} className="th-s-acc" strokeWidth="1.2" opacity="0.5" />
-        <line x1={x + 21} y1={y + 6} x2={x + 21} y2={y + 18} className="th-s-acc" strokeWidth="1.2" opacity="0.5" />
-      </g>
-    ))}
-    <g className="a-slide">
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-        <path
-          key={i}
-          d={`M${-20 + i * 64} 140 q 16 -9 32 0 t 32 0`}
-          className="th-s-acc"
-          strokeWidth="2"
-          opacity="0.4"
-        />
-      ))}
-    </g>
-    <g className="a-slide" style={d(-1.6)}>
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-        <path
-          key={i}
-          d={`M${-20 + i * 64} 156 q 16 -9 32 0 t 32 0`}
-          className="th-s-acc"
-          strokeWidth="2"
-          opacity="0.22"
-        />
-      ))}
-    </g>
-  </Frame>
-)
 
 /* ------------------------------------------------------------------ mapping */
 
@@ -682,8 +585,6 @@ const thumbs: Record<string, () => ReactNode> = {
   arxiv_server: ArxivServer,
   common_go_utils: CommonGoUtils,
   word_lists: WordLists,
-  AOC: Aoc,
-  docker_test: DockerTest,
 }
 
 export function Thumb({ slug }: { slug: string }) {

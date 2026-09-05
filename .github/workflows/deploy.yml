@@ -44,10 +44,45 @@ jobs:
         with:
           path: dist
 
+  docker:
+    name: Docker image
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - name: Build image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: runtime
+          load: true
+          tags: fabriceboyer-github-io:ci
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Smoke test the container
+        run: |
+          docker run -d --name site -p 8080:80 fabriceboyer-github-io:ci
+          for i in $(seq 1 30); do
+            if curl -fsS http://localhost:8080/ > /dev/null; then
+              echo "Le conteneur répond."
+              curl -fsS http://localhost:8080/ | grep -q '<div id="root">'
+              docker rm -f site
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Le conteneur n'a pas répondu à temps." >&2
+          docker logs site
+          docker rm -f site
+          exit 1
+
   deploy:
     name: Deploy to GitHub Pages
     if: github.ref == 'refs/heads/master' && github.event_name != 'pull_request'
-    needs: build
+    needs: [build, docker]
     runs-on: ubuntu-latest
     permissions:
       pages: write

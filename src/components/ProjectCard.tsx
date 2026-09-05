@@ -1,36 +1,23 @@
-import type { MouseEvent } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Github, Star } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { GITHUB_USER, langColors, type Project } from '../data/projects'
 import { Thumb } from '../thumbs'
-import type { Lang } from '../store/settings'
+import { useLang } from '../store/settings'
 
 export function ProjectCard({ project, index }: { project: Project; index: number }) {
-  const { t, i18n } = useTranslation()
-  const lang = (i18n.resolvedLanguage === 'en' ? 'en' : 'fr') as Lang
-
-  /** Suit le curseur pour le halo d'accent sur la carte. */
-  const onMove = (e: MouseEvent<HTMLElement>) => {
-    const r = e.currentTarget.getBoundingClientRect()
-    e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
-    e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
-  }
-
+  const { t } = useTranslation()
+  const lang = useLang()
   const repo = `https://github.com/${GITHUB_USER}/${project.slug}`
 
   return (
     <motion.article
       className="card"
-      onMouseMove={onMove}
-      initial={{ opacity: 0, y: 26 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration: 0.55, delay: Math.min(index, 5) * 0.06, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -5 }}
+      viewport={{ once: true, margin: '-40px' }}
+      transition={{ duration: 0.4, delay: Math.min(index, 5) * 0.04, ease: [0.22, 1, 0.36, 1] }}
     >
-      <span className="card-spot" aria-hidden="true" />
-
       <div className="card-media">
         <Thumb slug={project.slug} />
         {project.demo && (
@@ -46,7 +33,7 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
           <h3 className="card-title">{project.title}</h3>
           {project.stars > 0 && (
             <span className="card-stars" title={t('card.stars', { count: project.stars })}>
-              <Star size={12} strokeWidth={2.6} />
+              <Star size={11} strokeWidth={2.2} />
               {project.stars}
             </span>
           )}
@@ -75,11 +62,11 @@ export function ProjectCard({ project, index }: { project: Project; index: numbe
               rel="noreferrer noopener"
             >
               {t('card.demo')}
-              <ArrowUpRight size={14} strokeWidth={2.6} />
+              <ArrowUpRight size={13} strokeWidth={2.2} />
             </a>
           )}
           <a className="card-link" href={repo} target="_blank" rel="noreferrer noopener">
-            <Github size={14} strokeWidth={2.2} />
+            <Github size={13} strokeWidth={2} />
             {t('card.code')}
           </a>
         </div>

@@ -1,17 +1,18 @@
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Backdrop } from './components/Backdrop'
 import { Header } from './components/Header'
 import { Hero } from './components/Hero'
 import { Section } from './components/Section'
 import { Footer } from './components/Footer'
-import { resolveTheme, useSettings } from './store/settings'
+import { resolveTheme, useLang, useSettings } from './store/settings'
 
 export default function App() {
   const { t, i18n } = useTranslation()
-  const { theme, lang, accent } = useSettings()
+  const theme = useSettings((s) => s.theme)
+  const accent = useSettings((s) => s.accent)
+  const lang = useLang()
 
-  // Thème : applique le choix, et suit la préférence système en mode « system ».
+  // Applique le thème choisi ; en mode « système », suit la préférence de l'OS.
   useEffect(() => {
     const apply = () => {
       document.documentElement.dataset.theme = resolveTheme(theme)
@@ -41,7 +42,6 @@ export default function App() {
       <a className="skip-link" href="#apps">
         {t('a11y.skip')}
       </a>
-      <Backdrop />
       <Header />
       <main>
         <Hero />

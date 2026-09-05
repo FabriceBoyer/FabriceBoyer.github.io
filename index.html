@@ -4,33 +4,58 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Fabrice Boyer — Projets</title>
-    <meta name="description" content="Projets open-source de Fabrice Boyer : applications web statiques, explorateurs de données, serveurs d'API et librairies." />
+    <meta
+      name="description"
+      content="Projets open-source de Fabrice Boyer : applications web statiques, explorateurs de données, serveurs d'API et librairies."
+    />
     <meta name="color-scheme" content="light dark" />
     <meta property="og:title" content="Fabrice Boyer — Projets" />
-    <meta property="og:description" content="Applications web, explorateurs de données, serveurs d'API et librairies open-source." />
+    <meta
+      property="og:description"
+      content="Applications web, explorateurs de données, serveurs d'API et librairies open-source."
+    />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://fabriceboyer.github.io/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
     <script>
-      // Applique le thème + l'accent avant le premier rendu (évite tout flash).
+      // Thème, accent et langue résolus avant le premier rendu (évite tout flash).
+      // Sans choix explicite de l'utilisateur, on suit la configuration du système
+      // et du navigateur.
       (function () {
+        var el = document.documentElement
+        var s = {}
         try {
-          var s = JSON.parse(localStorage.getItem('fb-settings') || '{}').state || {};
-          var theme = s.theme || 'system';
-          var dark =
-            theme === 'dark' ||
-            (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
-          document.documentElement.dataset.theme = dark ? 'dark' : 'light';
-          if (s.accent) document.documentElement.style.setProperty('--accent', s.accent);
-          if (s.lang) document.documentElement.lang = s.lang;
+          s = JSON.parse(localStorage.getItem('fb-settings') || '{}').state || {}
         } catch (e) {}
-      })();
+
+        var theme = s.theme || 'system'
+        var dark =
+          theme === 'dark' ||
+          (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        el.dataset.theme = dark ? 'dark' : 'light'
+
+        if (s.accent) el.style.setProperty('--accent', s.accent)
+
+        var lang = s.lang
+        if (lang !== 'fr' && lang !== 'en') {
+          var tags = navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language]
+          lang = 'fr'
+          for (var i = 0; i < tags.length; i++) {
+            var base = String(tags[i] || '').toLowerCase().split('-')[0]
+            if (base === 'fr' || base === 'en') {
+              lang = base
+              break
+            }
+          }
+        }
+        el.lang = lang
+      })()
     </script>
   </head>
   <body>

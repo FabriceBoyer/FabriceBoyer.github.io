@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Check, Monitor, Moon, Palette, Sun } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
-import { ACCENTS, useSettings, type Lang, type Theme } from '../store/settings'
+import { ACCENTS, useLang, useSettings, type Lang, type Theme } from '../store/settings'
 
 const THEMES: Array<{ id: Theme; Icon: typeof Sun; key: 'light' | 'dark' | 'system' }> = [
   { id: 'light', Icon: Sun, key: 'light' },
@@ -27,10 +27,10 @@ export function ThemeToggle() {
           onClick={() => setTheme(id)}
         >
           {theme === id && (
-            <motion.span layoutId="theme-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
+            <motion.span layoutId="theme-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 40 }} />
           )}
           <span>
-            <Icon size={14} strokeWidth={2.4} />
+            <Icon size={13} strokeWidth={2.1} />
           </span>
         </button>
       ))}
@@ -40,7 +40,7 @@ export function ThemeToggle() {
 
 export function LangToggle() {
   const { t } = useTranslation()
-  const lang = useSettings((s) => s.lang)
+  const lang = useLang()
   const setLang = useSettings((s) => s.setLang)
 
   return (
@@ -48,7 +48,7 @@ export function LangToggle() {
       {(['fr', 'en'] as Lang[]).map((l) => (
         <button key={l} type="button" aria-pressed={lang === l} lang={l} onClick={() => setLang(l)}>
           {lang === l && (
-            <motion.span layoutId="lang-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 420, damping: 34 }} />
+            <motion.span layoutId="lang-pill" className="seg-pill" transition={{ type: 'spring', stiffness: 500, damping: 40 }} />
           )}
           <span>{l.toUpperCase()}</span>
         </button>
@@ -88,7 +88,7 @@ export function AccentPicker() {
         title={t('a11y.accent')}
         onClick={() => setOpen((o) => !o)}
       >
-        <Palette size={15} strokeWidth={2.2} />
+        <Palette size={14} strokeWidth={2} />
         <span className="accent-dot" />
       </button>
 
@@ -96,10 +96,10 @@ export function AccentPicker() {
         {open && (
           <motion.div
             className="accent-pop"
-            initial={{ opacity: 0, y: -8, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -8, scale: 0.96 }}
-            transition={{ type: 'spring', stiffness: 460, damping: 32 }}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.14 }}
           >
             <div className="accent-pop-title">{t('a11y.accent')}</div>
             <div className="swatches">
@@ -114,7 +114,7 @@ export function AccentPicker() {
                   style={{ background: a.value, color: a.value }}
                   onClick={() => setAccent(a.value)}
                 >
-                  {accent === a.value && <Check size={12} strokeWidth={3.4} />}
+                  {accent === a.value && <Check size={11} strokeWidth={3} />}
                 </button>
               ))}
             </div>

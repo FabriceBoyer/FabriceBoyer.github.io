@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react'
 import { animate, motion, useReducedMotion } from 'framer-motion'
-import { ArrowDown, Github } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { GITHUB_USER, projects } from '../data/projects'
 
 const up = {
-  hidden: { opacity: 0, y: 22 },
+  hidden: { opacity: 0, y: 10 },
   show: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: 0.06 * i, duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
+    transition: { delay: 0.05 * i, duration: 0.4, ease: [0.22, 1, 0.36, 1] as const },
   }),
 }
 
-/** Petit compteur qui s'incrémente au chargement. */
+/** Compteur discret qui s'incrémente au chargement. */
 function Counter({ to }: { to: number }) {
   const still = useReducedMotion()
   const [n, setN] = useState(still ? to : 0)
@@ -21,8 +21,8 @@ function Counter({ to }: { to: number }) {
   useEffect(() => {
     if (still) return
     const controls = animate(0, to, {
-      duration: 1.1,
-      delay: 0.45,
+      duration: 0.9,
+      delay: 0.3,
       ease: [0.22, 1, 0.36, 1],
       onUpdate: (v) => setN(Math.round(v)),
     })
@@ -44,15 +44,12 @@ export function Hero() {
 
   return (
     <section className="hero shell" id="top">
-      <motion.div custom={0} variants={up} initial="hidden" animate="show">
-        <span className="eyebrow">
-          {t('hero.status')}
-          <i className="pulse" />
-        </span>
-      </motion.div>
+      <motion.p className="hero-name" custom={0} variants={up} initial="hidden" animate="show">
+        {t('hero.name')}
+      </motion.p>
 
       <motion.h1 custom={1} variants={up} initial="hidden" animate="show">
-        {t('hero.title_a')} <span className="grad">{t('hero.title_b')}</span> {t('hero.title_c')}
+        {t('hero.title')}
       </motion.h1>
 
       <motion.p className="hero-sub" custom={2} variants={up} initial="hidden" animate="show">
@@ -62,7 +59,7 @@ export function Hero() {
       <motion.div className="hero-cta" custom={3} variants={up} initial="hidden" animate="show">
         <a className="btn btn-primary" href="#apps">
           {t('hero.cta_explore')}
-          <ArrowDown size={16} strokeWidth={2.4} />
+          <ArrowRight size={15} strokeWidth={2.2} />
         </a>
         <a
           className="btn btn-ghost"
@@ -70,7 +67,7 @@ export function Hero() {
           target="_blank"
           rel="noreferrer noopener"
         >
-          <Github size={16} strokeWidth={2.2} />
+          <Github size={15} strokeWidth={2} />
           {t('hero.cta_github')}
         </a>
       </motion.div>

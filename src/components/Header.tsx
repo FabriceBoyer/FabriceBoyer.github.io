@@ -9,7 +9,7 @@ export function Header() {
   const [stuck, setStuck] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setStuck(window.scrollY > 12)
+    const onScroll = () => setStuck(window.scrollY > 8)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -20,8 +20,13 @@ export function Header() {
       <div className="shell header-inner">
         <a className="brand" href="#top">
           <span className="brand-mark">FB</span>
-          <span className="brand-name">Fabrice Boyer</span>
+          Fabrice Boyer
         </a>
+
+        <nav className="header-nav">
+          <a href="#apps">{t('nav.apps')}</a>
+          <a href="#libs">{t('nav.libs')}</a>
+        </nav>
 
         <div className="header-actions">
           <LangToggle />
@@ -34,7 +39,7 @@ export function Header() {
             rel="noreferrer noopener"
             aria-label={t('nav.github')}
           >
-            <Github size={16} strokeWidth={2.2} />
+            <Github size={15} strokeWidth={2} />
           </a>
         </div>
       </div>
