@@ -1,0 +1,61 @@
+import type { Dict } from './fr'
+
+export const en: Dict = {
+  nav: { apps: 'Applications', libs: 'Libraries', github: 'GitHub' },
+  a11y: {
+    skip: 'Skip to content',
+    theme: 'Switch theme',
+    lang: 'Switch language',
+    accent: 'Pick an accent colour',
+    light: 'Light',
+    dark: 'Dark',
+    system: 'System',
+  },
+  hero: {
+    status: 'Available on GitHub',
+    title_a: 'I build',
+    title_b: 'tools that fit',
+    title_c: 'inside a browser.',
+    sub: 'Static applications, explorers for very large datasets, minimal API servers and small libraries. Everything is open-source and everything runs without depending on a third-party service.',
+    cta_explore: 'Explore the projects',
+    cta_github: 'View on GitHub',
+    stat_projects: 'Public projects',
+    stat_live: 'Live sites',
+    stat_langs: 'Languages',
+    stat_stars: 'Stars',
+  },
+  apps: {
+    kicker: 'Live',
+    title: 'Applications and sites',
+    sub: 'Projects you can open in one click: each one is deployed on GitHub Pages and runs entirely in the browser, with no backend and no account to create.',
+  },
+  libs: {
+    kicker: 'Under the hood',
+    title: 'Libraries, services and tools',
+    sub: 'The more abstract building blocks: API servers fed by local dumps, reusable modules, datasets and command-line tools.',
+  },
+  filters: { all: 'All', lang: 'Language' },
+  card: {
+    demo: 'Demo',
+    code: 'Source code',
+    live: 'Live',
+    stars_one: '{{count}} star',
+    stars_other: '{{count}} stars',
+    updated: 'Updated {{date}}',
+  },
+  kinds: {
+    webapp: 'web app',
+    game: 'game',
+    explorer: 'explorer',
+    server: 'server',
+    library: 'library',
+    dataset: 'dataset',
+    tool: 'tool',
+    lab: 'sandbox',
+  },
+  empty: 'No project matches this filter.',
+  footer: {
+    built: 'Built with React, Vite and Framer Motion. Deployed by GitHub Actions.',
+    source: 'Source of this page',
+  },
+}

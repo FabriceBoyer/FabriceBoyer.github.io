@@ -1,0 +1,61 @@
+export const fr = {
+  nav: { apps: 'Applications', libs: 'Librairies', github: 'GitHub' },
+  a11y: {
+    skip: 'Aller au contenu',
+    theme: 'Changer de thème',
+    lang: 'Changer de langue',
+    accent: "Choisir la couleur d'accent",
+    light: 'Clair',
+    dark: 'Sombre',
+    system: 'Système',
+  },
+  hero: {
+    status: 'Disponible sur GitHub',
+    title_a: 'Je construis des',
+    title_b: 'outils qui tiennent',
+    title_c: 'dans un navigateur.',
+    sub: "Applications statiques, explorateurs de jeux de données massifs, serveurs d'API minimalistes et petites librairies. Tout est open-source, tout tourne sans dépendre d'un service tiers.",
+    cta_explore: 'Explorer les projets',
+    cta_github: 'Voir sur GitHub',
+    stat_projects: 'Projets publics',
+    stat_live: 'Sites en ligne',
+    stat_langs: 'Langages',
+    stat_stars: 'Étoiles',
+  },
+  apps: {
+    kicker: 'En ligne',
+    title: 'Applications et sites',
+    sub: "Des projets qui se lancent d'un clic : chacun est déployé sur GitHub Pages et tourne entièrement dans le navigateur, sans backend ni compte à créer.",
+  },
+  libs: {
+    kicker: 'Sous le capot',
+    title: 'Librairies, services et outils',
+    sub: "Les briques plus abstraites : serveurs d'API alimentés par des dumps locaux, modules réutilisables, jeux de données et outils en ligne de commande.",
+  },
+  filters: { all: 'Tous', lang: 'Langage' },
+  card: {
+    demo: 'Démo',
+    code: 'Code source',
+    live: 'En ligne',
+    stars_one: '{{count}} étoile',
+    stars_other: '{{count}} étoiles',
+    updated: 'Mis à jour en {{date}}',
+  },
+  kinds: {
+    webapp: 'application web',
+    game: 'jeu',
+    explorer: 'explorateur',
+    server: 'serveur',
+    library: 'librairie',
+    dataset: 'jeu de données',
+    tool: 'outil',
+    lab: 'bac à sable',
+  },
+  empty: 'Aucun projet ne correspond à ce filtre.',
+  footer: {
+    built: 'Construit avec React, Vite et Framer Motion. Déployé par GitHub Actions.',
+    source: 'Source de cette page',
+  },
+}
+
+export type Dict = typeof fr
