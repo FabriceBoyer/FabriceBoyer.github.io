@@ -31,6 +31,36 @@ export const langColors: Record<string, string> = {
 export const projects: Project[] = [
   // ------------------------------------------------------------- applications
   {
+    slug: 'algo_explorer',
+    title: 'Algo Explorer',
+    category: 'apps',
+    kind: 'explorer',
+    demo: 'https://fabriceboyer.github.io/algo_explorer/',
+    lang: 'TypeScript',
+    stars: 0,
+    updated: '2026-09-13',
+    topics: ['algorithms', 'simulation', 'learning'],
+    desc: {
+      fr: "Atelier visuel pour apprendre les algorithmes en manipulant leur exécution : douze ateliers simulables et exportables couvrent tris, recherches, tableaux et mathématiques. Un catalogue complémentaire permet de consulter les sources de TheAlgorithms sur GitHub.",
+      en: 'A visual workshop for learning algorithms by controlling their execution: twelve simulated, exportable workshops cover sorting, searching, arrays and mathematics. A complementary catalogue links to TheAlgorithms sources on GitHub.',
+    },
+  },
+  {
+    slug: 'isa_explorer',
+    title: 'ISA Explorer',
+    category: 'apps',
+    kind: 'explorer',
+    demo: 'https://fabriceboyer.github.io/isa_explorer/',
+    lang: 'TypeScript',
+    stars: 0,
+    updated: '2026-09-13',
+    topics: ['assembly', 'processors', 'simulation'],
+    desc: {
+      fr: "Explorateur pédagogique des jeux d’instructions, des registres et de l’assembleur. Comparez plusieurs architectures et expérimentez dans un laboratoire simulant des sous-ensembles AMD64, ARM64 et RISC-V, entièrement dans le navigateur.",
+      en: 'An educational explorer of instruction sets, registers and assembly. Compare processor architectures and experiment in a lab simulating subsets of AMD64, ARM64 and RISC-V, entirely in the browser.',
+    },
+  },
+  {
     slug: 'gcc_explorer',
     title: 'GCC Explorer',
     category: 'apps',

@@ -568,9 +568,45 @@ const WordLists = () => (
 
 
 
+const AlgoExplorer = () => (
+  <Frame>
+    <path d="M46 140 H274" className="th-s-dim" strokeWidth="1.4" opacity="0.4" />
+    {[36, 60, 46, 88, 70, 108].map((height, i) => (
+      <g key={i} className="a-floatsm" style={d(i * 0.45)}>
+        <rect x={54 + i * 36} y={140 - height} width="24" height={height} rx="4"
+          className="th-acc" opacity={0.25 + i * 0.1} />
+      </g>
+    ))}
+    <path d="M66 22 H246 M240 16 L246 22 L240 28"
+      className="th-s-acc a-draw" strokeWidth="1.6" style={draw(200)} />
+  </Frame>
+)
+
+const IsaExplorer = () => (
+  <Frame>
+    <rect x="118" y="48" width="84" height="84" rx="10"
+      className="th-s-acc" strokeWidth="1.6" />
+    <text x="160" y="95" textAnchor="middle" fontSize="14" className="th-acc" style={mono}>ISA</text>
+    {[0, 1, 2, 3].map((i) => (
+      <g key={i}>
+        <path d={`M92 ${60 + i * 20} H118 M202 ${60 + i * 20} H228`}
+          className="th-s-dim" strokeWidth="1.4" opacity="0.5" />
+        <rect x="54" y={54 + i * 20} width="34" height="12" rx="3"
+          className="th-acc a-pulse" style={d(i * 0.6)} />
+        <rect x="232" y={54 + i * 20} width="34" height="12" rx="3"
+          className="th-acc a-pulse" style={d(i * 0.6 + 1.5)} />
+      </g>
+    ))}
+    <path d="M140 32 V48 M160 32 V48 M180 32 V48 M140 132 V148 M160 132 V148 M180 132 V148"
+      className="th-s-dim" strokeWidth="1.4" opacity="0.5" />
+  </Frame>
+)
+
 /* ------------------------------------------------------------------ mapping */
 
 const thumbs: Record<string, () => ReactNode> = {
+  algo_explorer: AlgoExplorer,
+  isa_explorer: IsaExplorer,
   gcc_explorer: GccExplorer,
   metamath_explorer: MetamathExplorer,
   camping_simulator: CampingSimulator,
